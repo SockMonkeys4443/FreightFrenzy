@@ -62,6 +62,9 @@ public class DarkSkystonesRedBridge extends SuperDark implements DarkAutonomous 
 
         drive.driveDistance(DeadWheels.grabberSide, -REPOSITION_BRIDGE_DIST, REPOSITION_POWER, REPOSITION_TIME);
 
+        //goes under bridge
+        drive.driveDistance(DeadWheels.armSide, UNDER_BRIDGE_DIST, UNDER_BRIDGE_POWER, UNDER_BRIDGE_TIME);
+
         //drives to park, taking into account where we went to grab the skystone
         drive.driveDistance(DeadWheels.armSide, DROP_STONE_DIST -distanceSkystone , DROP_STONE_POWER, DROP_STONE_TIME);
 
