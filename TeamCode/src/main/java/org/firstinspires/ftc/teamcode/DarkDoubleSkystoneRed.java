@@ -38,7 +38,7 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
         else {distanceSkystone = 0;}
 
         //strafe to face skystone
-        drive.driveDistance(DeadWheels.grabberSide, distanceSkystone-SKYSTONE_WIDTH-10, 0.35, 3);
+        drive.driveDistance(DeadWheels.grabberSide, distanceSkystone-SKYSTONE_WIDTH + 10, 0.35, 3);
 
         arm.setClaw(false); //opens claw
 
@@ -56,19 +56,20 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
         sleep(250);
         drive.newTurnTo(-90, 1, 3);
 
-        drive.driveDistance(DeadWheels.grabberSide, REPOSITION_BRIDGE_DIST, 0.6, 3);
+        drive.driveDistance(DeadWheels.armSide, UNDER_BRIDGE_DIST, UNDER_BRIDGE_POWER, UNDER_BRIDGE_TIME);
+        arm.goToAngle(50f, 0.7);
 
         //drives to deliver the skystone under the bridge
-        drive.driveDistance(DeadWheels.armSide, DROP_STONE_DIST -distanceSkystone , DROP_STONE_POWER, DROP_STONE_TIME);
+        drive.driveDistance(DeadWheels.armSide, DROP_STONE_DIST, DROP_STONE_POWER, DROP_STONE_TIME);
 
         //arm.goToAngle(20f,0.5);
         arm.setClaw(false); //opens claw
 
-        drive.newTurnTo(-180f, 0.75, 3);
+        //drive.newTurnTo(-180f, 0.75, 3);
 
-        drive.driveDistance(DeadWheels.armSide, -TILE_SIZE * 1.5f, 0.75, 3);
+        drive.driveDistance(DeadWheels.grabberSide, -TILE_SIZE * 1.8f, 0.75, 3);
 
-        drive.driveDistance(DeadWheels.grabberSide, -TILE_SIZE * 5f,0.75,5);
+        drive.driveDistance(DeadWheels.armSide, -TILE_SIZE * 5f,0.75,5);
 
         stop();
 

@@ -40,10 +40,15 @@ public interface DarkAutonomous {
     double REPOSITION_POWER = 0.8;
     float REPOSITION_TIME = 3;
 
+    //drive armSide to clear the bridge before lifting the arm
+    float UNDER_BRIDGE_DIST = 80;
+    double UNDER_BRIDGE_POWER = 1;
+    float UNDER_BRIDGE_TIME = 3;
+
     //drive grabberSide to drop the stone, driving just far enough to cross the bridge line
-    float DROP_STONE_DIST = 150;
+    float DROP_STONE_DIST = 50;
     double DROP_STONE_POWER = 1;
-    float DROP_STONE_TIME = 4;
+    float DROP_STONE_TIME = 3;
 
     //after dropping, drive back to park
     float TO_PARK_DIST = 55;
