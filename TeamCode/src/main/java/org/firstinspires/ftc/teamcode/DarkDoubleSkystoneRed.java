@@ -19,26 +19,30 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
         //drive to where all 3 stones fit into view
         CircuitBreakersVuforia.skystonePos skystonePosition;
 
-        //drive to skystone
 
-        //drive to scoop skystone
+        //drive to scan skystone
 
-        drive.driveDistance(DeadWheels.armSide, TO_SCAN_DIST, 0.5, 3);
+        drive.driveDistance(DeadWheels.armSide, TO_SCAN_DIST, TO_SCAN_POWER, TO_SCAN_TIME);
+
 
         skystonePosition = camera.circuitScan(true);
         telemetry.addData("Skystone position:", skystonePosition );
         telemetry.update();
 
-        arm.gotoGrabLocation(0.4);
+
+        arm.gotoGrabLocation(ARM_DEPLOY_POWER);
+
 
         float distanceSkystone;
 
-        if(skystonePosition == CircuitBreakersVuforia.skystonePos.LEFT) {distanceSkystone = 20;}
-        else if (skystonePosition == CircuitBreakersVuforia.skystonePos.RIGHT) {distanceSkystone = -20;}
+        if(skystonePosition == CircuitBreakersVuforia.skystonePos.LEFT) {distanceSkystone = SKYSTONE_WIDTH;}
+        else if (skystonePosition == CircuitBreakersVuforia.skystonePos.RIGHT) {distanceSkystone = -SKYSTONE_WIDTH;}
         else {distanceSkystone = 0;}
 
+
         //strafe to face skystone
-        drive.driveDistance(DeadWheels.grabberSide, distanceSkystone-SKYSTONE_WIDTH + 10, 0.35, 3);
+        //minus 5 to compensate for the depot placement on this side
+        drive.driveDistance(DeadWheels.grabberSide, distanceSkystone-SKYSTONE_WIDTH - 20, STONE_STRAFE_POWER, STONE_STRAFE_TIME);
 
         arm.setClaw(false); //opens claw
 
@@ -47,14 +51,14 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
 
         arm.setClaw(true);
 
-        sleep(2000);
+        sleep(500);
 
         //drives backwards after picking up the skystone
         drive.driveDistance(DeadWheels.armSide, -BACK_AFTERGRAB_DIST, BACK_AFTERGRAB_POWER, BACK_AFTERGRAB_TIME);
 
-        drive.newTurnTo(-90, 1, 3);
+        drive.newTurnTo(-TURN_TARGET_ANGLE, TURN_POWER, TURN_TIME);
         sleep(250);
-        drive.newTurnTo(-90, 1, 3);
+        drive.newTurnTo(-TURN_TARGET_ANGLE, TURN_POWER, TURN_TIME);
 
         drive.driveDistance(DeadWheels.armSide, UNDER_BRIDGE_DIST, UNDER_BRIDGE_POWER, UNDER_BRIDGE_TIME);
         arm.goToAngle(50f, 0.7);

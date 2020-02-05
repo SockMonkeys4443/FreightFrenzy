@@ -41,7 +41,7 @@ public interface DarkAutonomous {
     float REPOSITION_TIME = 3;
 
     //drive armSide to clear the bridge before lifting the arm
-    float UNDER_BRIDGE_DIST = 80;
+    float UNDER_BRIDGE_DIST = 110;
     double UNDER_BRIDGE_POWER = 1;
     float UNDER_BRIDGE_TIME = 3;
 
