@@ -19,9 +19,6 @@ public class DarkSkystonesBlueBridge extends SuperDark implements DarkAutonomous
         //drive to where all 3 stones fit into view
         CircuitBreakersVuforia.skystonePos skystonePosition;
 
-        skystonePosition = camera.circuitScan(true);
-        telemetry.addData("Skystone position:", skystonePosition );
-        telemetry.update();
 
         //drive to skystone
 
@@ -29,6 +26,10 @@ public class DarkSkystonesBlueBridge extends SuperDark implements DarkAutonomous
         //drive to scan skystone
 
         drive.driveDistance(DeadWheels.armSide, TO_SCAN_DIST, TO_SCAN_POWER, TO_SCAN_TIME);
+
+        skystonePosition = camera.circuitScan(true);
+        telemetry.addData("Skystone position:", skystonePosition );
+        telemetry.update();
 
         arm.gotoGrabLocation(ARM_DEPLOY_POWER);
 

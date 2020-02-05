@@ -72,6 +72,7 @@ public class DarkCamera {
         LEFT, RIGHT
     }
 
+    /*
     public StoneLocation scanTwoStones(boolean saveImages) {
         Image image = null;
 
@@ -184,5 +185,5 @@ public class DarkCamera {
 
         return result;
     }
-
+*/
 }

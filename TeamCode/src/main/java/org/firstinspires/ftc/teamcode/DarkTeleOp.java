@@ -60,8 +60,6 @@ public class DarkTeleOp extends SuperDark {
 
         //buttons
 
-        buttons1.update();
-        buttons2.update();
 
         if (buttons1.buttonPressed(Y)) {
             toggleFront();
@@ -86,6 +84,9 @@ public class DarkTeleOp extends SuperDark {
         if (buttons2.buttonPressed(A)) {
             toggleArmReseting();
         }
+
+        buttons1.update();
+        buttons2.update();
 
         //arm power
         //oldArm.armPower(gamepad2.right_stick_y * armSpeed);
@@ -154,6 +155,7 @@ public class DarkTeleOp extends SuperDark {
 
         void toggleServo() {
             if (foundServo.getPosition() == 1) {
+                telemetry.speak("Whos Joe?");
                 foundServo.setPosition(0.17); //~30 degrees from the 0 point - that being the top
             } else {
                 foundServo.setPosition(1);
@@ -170,9 +172,11 @@ public class DarkTeleOp extends SuperDark {
 
         void toggleSpeed() {
             if (drivePower == 1) {
+                telemetry.speak("Slowmode Activated");
                 drivePower = 0.3;
             } else {
                 drivePower = 1;
+                telemetry.speak("Slowmode Off");
             }
         }
 
