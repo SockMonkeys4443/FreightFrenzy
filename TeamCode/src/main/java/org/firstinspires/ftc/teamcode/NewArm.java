@@ -91,7 +91,7 @@ public class NewArm {
 
     void goToAngle(float angle, double power) {
         angle = Math.max(80, angle);
-        angle = Math.min(-15, angle);
+        angle = Math.min(-150, angle);
 
         int anglePos = Math.round(((9 * 1440) * (angle / 360)));
 
