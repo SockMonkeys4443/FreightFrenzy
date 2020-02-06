@@ -72,6 +72,9 @@ public class DarkTeleOp extends SuperDark {
         if (buttons1.buttonPressed(A)) {
             toggleSpeed();
         }
+        if (buttons1.buttonPressed(X)) {
+            telemetry.speak("Fifty Percent");
+        }
 
         if (buttons2.buttonPressed(Y)) {
             toggleArmSpeed();
