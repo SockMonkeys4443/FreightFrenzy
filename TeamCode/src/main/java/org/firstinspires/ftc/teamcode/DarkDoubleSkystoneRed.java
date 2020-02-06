@@ -24,21 +24,24 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
 
         drive.driveDistance(DeadWheels.armSide, TO_SCAN_DIST, TO_SCAN_POWER, TO_SCAN_TIME);
 
+        telemetry.speak("Scanning");
 
         skystonePosition = camera.circuitScan(true);
         telemetry.addData("Skystone position:", skystonePosition );
         telemetry.update();
 
-
+        telemetry.speak("Deploying Arm");
         arm.gotoGrabLocation(ARM_DEPLOY_POWER);
 
 
         float distanceSkystone;
 
-        if(skystonePosition == CircuitBreakersVuforia.skystonePos.LEFT) {distanceSkystone = SKYSTONE_WIDTH;}
-        else if (skystonePosition == CircuitBreakersVuforia.skystonePos.RIGHT) {distanceSkystone = -SKYSTONE_WIDTH;}
-        else {distanceSkystone = 0;}
+        if(skystonePosition == CircuitBreakersVuforia.skystonePos.LEFT) {distanceSkystone = SKYSTONE_WIDTH; telemetry.speak("Left"); }
+        else if (skystonePosition == CircuitBreakersVuforia.skystonePos.RIGHT) {distanceSkystone = -SKYSTONE_WIDTH; telemetry.speak("Right"); }
+        else {distanceSkystone = 0; telemetry.speak("Center"); }
 
+
+        telemetry.speak("Moving to skystone");
 
         //strafe to face skystone
         //minus 5 to compensate for the depot placement on this side
@@ -46,35 +49,51 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
 
         arm.setClaw(false); //opens claw
 
+        telemetry.speak("Eating skystone");
+
         //drive forwards to 'eat' skystone
         drive.driveDistance(DeadWheels.armSide, TO_GRAB_DIST, TO_GRAB_POWER, TO_GRAB_TIME);
 
         arm.setClaw(true);
+        telemetry.speak("yum");
+
 
         sleep(500);
 
         //drives backwards after picking up the skystone
         drive.driveDistance(DeadWheels.armSide, -BACK_AFTERGRAB_DIST, BACK_AFTERGRAB_POWER, BACK_AFTERGRAB_TIME);
 
+        telemetry.speak("turning");
+
         drive.newTurnTo(-TURN_TARGET_ANGLE, TURN_POWER, TURN_TIME);
         sleep(250);
         drive.newTurnTo(-TURN_TARGET_ANGLE, TURN_POWER, TURN_TIME);
 
+        telemetry.speak("Driving under bridge");
         drive.driveDistance(DeadWheels.armSide, UNDER_BRIDGE_DIST, UNDER_BRIDGE_POWER, UNDER_BRIDGE_TIME);
-        arm.goToAngle(50f, 0.7);
+
+        telemetry.speak("Lifting arm");
+        arm.goToAngle(-50f, 0.7);
+
 
         //drives to deliver the skystone under the bridge
         drive.driveDistance(DeadWheels.armSide, DROP_STONE_DIST, DROP_STONE_POWER, DROP_STONE_TIME);
 
+        telemetry.speak("dropping stone");
         //arm.goToAngle(20f,0.5);
         arm.setClaw(false); //opens claw
 
         //drive.newTurnTo(-180f, 0.75, 3);
 
+        telemetry.speak("moving to center");
+
         drive.driveDistance(DeadWheels.grabberSide, -TILE_SIZE * 1.8f, 0.75, 3);
+
+        telemetry.speak("crossing neutral bridge");
 
         drive.driveDistance(DeadWheels.armSide, -TILE_SIZE * 5f,0.75,5);
 
+        telemetry.speak("joebama");
         stop();
 
     }
