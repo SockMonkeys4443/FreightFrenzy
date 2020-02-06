@@ -158,6 +158,7 @@ public class DarkTeleOp extends SuperDark {
                 telemetry.speak("Whos Joe?");
                 foundServo.setPosition(0.17); //~30 degrees from the 0 point - that being the top
             } else {
+                telemetry.speak("Joe Mama!");
                 foundServo.setPosition(1);
             }
         }
