@@ -65,7 +65,18 @@ public class DarkCamera {
     }
 
     public CircuitBreakersVuforia.skystonePos circuitScan(boolean save) {
-        return circuitBreakers.vuforiascan(save, false);
+        CircuitBreakersVuforia.skystonePos pos = circuitBreakers.vuforiascan(save, false);
+        if(opMode.telemetryEnabled) {
+            switch (pos) {
+                case LEFT:
+                    opMode.telemetry.speak("Left");
+                case CENTER:
+                    opMode.telemetry.speak("Center");
+                case RIGHT:
+                    opMode.telemetry.speak("Right");
+            }
+        }
+        return pos;
     }
 
     public enum StoneLocation {
