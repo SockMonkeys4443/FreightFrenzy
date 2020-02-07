@@ -1,10 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.ftccommon.SoundPlayer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name="\uD83D\uDC8E\uD83D\uDD34\uD83C\uDF09 Skystones Red Bridge", group="workingSkystones")
-public class DarkSkystonesRedBridge extends SuperDark implements DarkAutonomous  {
+@Autonomous(name="TEST Skystones Red Bridge", group="workingSkystones")
+public class DarkSkystonesRedBridgeTEST extends SuperDark implements DarkAutonomous  {
     @Override
     public void darkInit() {
         initCamera();
@@ -26,7 +25,7 @@ public class DarkSkystonesRedBridge extends SuperDark implements DarkAutonomous 
         //drive to scan skystone
 
         if(telemetryEnabled) telemetry.speak("Driving to scan skystone");
-        drive.driveDistance(DeadWheels.armSide, TO_SCAN_DIST, TO_SCAN_POWER, TO_SCAN_TIME);
+        drive.stableDriveDistance(DeadWheels.armSide, TO_SCAN_DIST, TO_SCAN_POWER, TO_SCAN_TIME);
 
 
         if(telemetryEnabled) telemetry.speak("Scanning skystone");
@@ -48,14 +47,14 @@ public class DarkSkystonesRedBridge extends SuperDark implements DarkAutonomous 
         if(telemetryEnabled) telemetry.speak("Strafing to the skystone");
         //strafe to face skystone
         //minus 5 to compensate for the depot placement on this side
-        drive.driveDistance(DeadWheels.grabberSide, distanceSkystone+ SKYSTONE_WIDTH + 20, STONE_STRAFE_POWER, STONE_STRAFE_TIME);
+        drive.stableDriveDistance(DeadWheels.grabberSide, distanceSkystone - SKYSTONE_WIDTH + 5, STONE_STRAFE_POWER, STONE_STRAFE_TIME);
 
         arm.setClaw(false); //opens claw
 
 
         if(telemetryEnabled) telemetry.speak("Eating skystone");
         //drive forwards to 'eat' skystone
-        drive.driveDistance(DeadWheels.armSide, TO_GRAB_DIST, TO_GRAB_POWER, TO_GRAB_TIME);
+        drive.stableDriveDistance(DeadWheels.armSide, TO_GRAB_DIST, TO_GRAB_POWER, TO_GRAB_TIME);
 
         arm.setClaw(true);
 
@@ -64,7 +63,7 @@ public class DarkSkystonesRedBridge extends SuperDark implements DarkAutonomous 
 
         if(telemetryEnabled) telemetry.speak("Driving back to turn");
         //drives backwards after picking up the skystone
-        drive.driveDistance(DeadWheels.armSide, -BACK_AFTERGRAB_DIST, BACK_AFTERGRAB_POWER, BACK_AFTERGRAB_TIME);
+        drive.stableDriveDistance(DeadWheels.armSide, -BACK_AFTERGRAB_DIST, BACK_AFTERGRAB_POWER, BACK_AFTERGRAB_TIME);
 
 
         if(telemetryEnabled) telemetry.speak("Turning");
@@ -73,25 +72,25 @@ public class DarkSkystonesRedBridge extends SuperDark implements DarkAutonomous 
         drive.newTurnTo(-TURN_TARGET_ANGLE, TURN_POWER, TURN_TIME);
 
         if(telemetryEnabled) telemetry.speak("Repositioning to be against bridge");
-        drive.driveDistance(DeadWheels.grabberSide, -REPOSITION_BRIDGE_DIST, REPOSITION_POWER, REPOSITION_TIME);
+        drive.stableDriveDistance(DeadWheels.grabberSide, -REPOSITION_BRIDGE_DIST, REPOSITION_POWER, REPOSITION_TIME);
 
 
         if(telemetryEnabled) telemetry.speak("Driving under bridge");
         //goes under bridge
-        drive.driveDistance(DeadWheels.armSide, UNDER_BRIDGE_DIST, UNDER_BRIDGE_POWER, UNDER_BRIDGE_TIME);
+        drive.stableDriveDistance(DeadWheels.armSide, UNDER_BRIDGE_DIST, UNDER_BRIDGE_POWER, UNDER_BRIDGE_TIME);
 
         if(telemetryEnabled) telemetry.speak("Going to drop stone");
         //drives to park, taking into account where we went to grab the skystone
-        drive.driveDistance(DeadWheels.armSide, DROP_STONE_DIST -distanceSkystone , DROP_STONE_POWER, DROP_STONE_TIME);
+        drive.stableDriveDistance(DeadWheels.armSide, DROP_STONE_DIST -distanceSkystone , DROP_STONE_POWER, DROP_STONE_TIME);
 
         arm.setClaw(false); //opens claw
 
         if(telemetryEnabled) telemetry.speak("Who's Joe");
-        drive.driveDistance(DeadWheels.armSide, -TO_PARK_DIST, TO_PARK_POWER, TO_PARK_TIME);
+        drive.stableDriveDistance(DeadWheels.armSide, -TO_PARK_DIST, TO_PARK_POWER, TO_PARK_TIME);
 
         if(telemetryEnabled) telemetry.speak("Joe Mama");
 
-        sleep(500);
+
         stop();
 
     }

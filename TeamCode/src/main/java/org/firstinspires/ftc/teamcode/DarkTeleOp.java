@@ -66,7 +66,13 @@ public class DarkTeleOp extends SuperDark {
         }
 
         if (buttons1.buttonPressed(B)) {
-            toggleServo();
+            if (foundServo.getPosition() == 1) {
+                telemetry.speak("Whos Joe?");
+                foundServo.setPosition(0.17); //~30 degrees from the 0 point - that being the top
+            } else {
+                telemetry.speak("Joe Mama!");
+                foundServo.setPosition(1);
+            }
         }
 
         if (buttons1.buttonPressed(A)) {
@@ -153,16 +159,6 @@ public class DarkTeleOp extends SuperDark {
             //else if (driveMode==DriveMode.DIAGONAL) {driveMode=DriveMode.ADJUSTED;}
             else {
                 driveMode = DriveMode.DIAGONAL;
-            }
-        }
-
-        void toggleServo() {
-            if (foundServo.getPosition() == 1) {
-                telemetry.speak("Whos Joe?");
-                foundServo.setPosition(0.17); //~30 degrees from the 0 point - that being the top
-            } else {
-                telemetry.speak("Joe Mama!");
-                foundServo.setPosition(1);
             }
         }
 

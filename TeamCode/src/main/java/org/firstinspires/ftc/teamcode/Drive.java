@@ -323,6 +323,111 @@ public class Drive {
         stopAll();
     }
 
+    /**
+     * Do not pass in a negative power, this method automatically handles the power being negative or positive
+     * @param axis
+     * @param distanceCM
+     * @param basePower - a positive number
+     */
+    void stableDriveDistance(boolean axis, float distanceCM, double basePower, float timeoutSeconds) {
+
+        if(distanceCM == 0) {
+            return;
+        }
+
+        Timer driveTimer = new Timer(opMode.runtime);
+
+        boolean sideways = !axis;
+
+        //the robot will be satisfied with being within 1 cm of the target
+        final float PRECISION_CM = 1;
+
+        basePower = Math.abs(basePower);
+        int startTicks = deadWheels.getTicks(axis);
+        int distanceTicks = deadWheels.CMtoticks(distanceCM);
+        int targetTicks = startTicks + distanceTicks;
+
+        int stableSideTicks = deadWheels.getTicks(sideways);
+        float stableAngle = imuController.getAngle();
+
+        driveTimer.restart();
+        while(opMode.opModeIsActive() && driveTimer.check() < timeoutSeconds) {
+            double power = basePower;
+
+            int currentTicks = deadWheels.getTicks(axis);
+            int offsetFromTarget = targetTicks - currentTicks;
+
+            float offsetRatio = offsetFromTarget/distanceTicks;
+
+            //offsetRatio = 1 - offsetRatio;
+
+            float modifier = 1-offsetRatio;
+
+            //will always make sure the power modifier is (equal to or) above .2
+            //modifier = Math.max(modifier, 0.05f);
+            //will always make sure the power modifier is (equal to or) below 1
+            //modifier = Math.min(modifier, 1f);
+
+            //need to go grabberSide
+            if(offsetFromTarget > 0) {
+                power = basePower * modifier;
+                power = Math.min(power, 1f);
+                power = Math.max(power, 0.25f);
+            }
+
+            //need to reverse
+            //TODO: issue?
+            if(offsetFromTarget < 0) {
+                power = basePower * modifier * -1;
+                power = Math.max(power, -1f);
+                power = Math.min(power, -0.25f);
+            }
+
+            //set drive power accordingly
+            if (axis == DeadWheels.grabberSide) {
+                goForwards(power);
+            }
+            //armSide
+            else {
+                strafeRight(power);
+            }
+
+
+            if(opMode.telemetryEnabled) {
+                opMode.telemetry.addData("Distance Travelled: ",currentTicks-targetTicks);
+                opMode.telemetry.addData("Modifier: ", modifier);
+                opMode.telemetry.addData("Offset:",offsetFromTarget);
+                opMode.telemetry.addData("Power: ", power);
+                opMode.telemetry.update();
+            }
+
+            //if the robot is close enough to the target, dictated by the PRECISION_CM variable
+            if(Math.abs(offsetFromTarget) < deadWheels.CMtoticks(PRECISION_CM) ) {
+                while(Math.abs(angleDiff(stableAngle, imuController.getAngle())) > 3 ) {
+                    newTurnTo(stableAngle, 0.8,0.5f);
+                }
+                break;
+            }
+
+            if(Math.abs(angleDiff(stableAngle, imuController.getAngle())) > 5 ) {
+                newTurnTo(stableAngle, 0.8, 0.5f);
+            }
+
+            if(Math.abs(deadWheels.getTicks(sideways) - stableSideTicks) > deadWheels.CMtoticks(3)) {
+                int offset = stableSideTicks - deadWheels.getTicks(sideways);
+                if(offset > deadWheels.CMtoticks(3)) {
+                    strafeLeft(-0.5);
+                }
+                else if(offset < deadWheels.CMtoticks(-3)) {
+                    strafeLeft(0.5);
+                }
+                else break;
+            }
+        }
+        stopAll();
+    }
+
+
 
 
 }

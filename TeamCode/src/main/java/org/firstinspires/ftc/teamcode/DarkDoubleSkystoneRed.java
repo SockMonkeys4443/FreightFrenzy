@@ -33,7 +33,6 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
         telemetry.addData("Skystone position:", skystonePosition );
         telemetry.update();
 
-        telemetry.speak("Deploying Arm");
         arm.gotoGrabLocation(ARM_DEPLOY_POWER);
 
 

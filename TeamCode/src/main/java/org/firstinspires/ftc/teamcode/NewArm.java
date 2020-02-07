@@ -154,6 +154,8 @@ public class NewArm {
             pitchMotor.setPower(power);
 
         }
+        pitchMotor.setPower(-0.2);
+        opMode.sleep(200);
         pitchMotor.setPower(0);
 
         while (extendState() && opMode.opModeIsActive()) {
