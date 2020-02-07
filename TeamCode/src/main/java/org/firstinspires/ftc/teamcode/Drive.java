@@ -249,7 +249,7 @@ public class Drive {
      * @param distanceCM
      * @param basePower - a positive number
      */
-    void driveDistance(boolean axis, float distanceCM, double basePower, float timeoutSeconds) {
+    void oldDriveDistance(boolean axis, float distanceCM, double basePower, float timeoutSeconds) {
 
         if(distanceCM == 0) {
             return;
@@ -329,7 +329,7 @@ public class Drive {
      * @param distanceCM
      * @param basePower - a positive number
      */
-    void stableDriveDistance(boolean axis, float distanceCM, double basePower, float timeoutSeconds) {
+    void driveDistance(boolean axis, float distanceCM, double basePower, float timeoutSeconds) {
 
         if(distanceCM == 0) {
             return;
