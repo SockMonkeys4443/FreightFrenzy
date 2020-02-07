@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.ftccommon.SoundPlayer;
 
 @Autonomous(name="Double Skystones Red", group="test")
 public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
@@ -13,6 +14,8 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
     @Override
     public void darkRunning() {
         timer.restart();
+
+        telemetryEnabled = true;
 
         //there are 29 inches between where the closest edge of the robot starts to the stones
 
@@ -87,7 +90,7 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
 
         telemetry.speak("moving to center");
 
-        drive.driveDistance(DeadWheels.grabberSide, -TILE_SIZE * 1.8f, 0.75, 3);
+        drive.driveDistance(DeadWheels.grabberSide, TILE_SIZE * 3.2f, 0.75, 3);
 
         telemetry.speak("crossing neutral bridge");
 
