@@ -26,6 +26,8 @@ public class DarkTeleOp extends SuperDark {
     boolean pitchReset = false;
     boolean extendReset = false;
 
+    boolean safety = false;
+
     GamepadButtons buttons1;
     GamepadButtons buttons2;
 
@@ -87,7 +89,7 @@ public class DarkTeleOp extends SuperDark {
         }
 
         if (buttons2.buttonPressed(X)) {
-            arm.resetPitchEncoder();
+            safety = !safety;
         }
 
         if (buttons2.buttonPressed(A)) {
@@ -99,14 +101,7 @@ public class DarkTeleOp extends SuperDark {
 
         //arm power
         //oldArm.armPower(gamepad2.right_stick_y * armSpeed);
-        if (armReseting) {
-            gotoGrabLocation(0.5f);
-        } else {
-            arm.extendPower(-gamepad2.left_stick_y * armSpeed);
-            arm.pitchPower(gamepad2.right_stick_y * armSpeed);
-            pitchReset = false;
-            extendReset = false;
-        }
+        runArm();
 
         if (armReseting && !arm.pitchState() && !arm.extendState()) {
             armReseting = false;
@@ -143,8 +138,23 @@ public class DarkTeleOp extends SuperDark {
 
     }
 
+    private void runArm() {
+        if (armReseting) {
+            gotoGrabLocation(0.5f);
+        } else {
+            float extendPower = -gamepad2.left_stick_y * armSpeed;
+            if (safety && extendPower > 0) {
+                extendPower = 0;
+            }
+            arm.extendPower(extendPower);
+            arm.pitchPower(gamepad2.right_stick_y * armSpeed);
+            pitchReset = false;
+            extendReset = false;
+        }
+    }
 
-        //toggles
+
+    //toggles
         void toggleFront() {
         if (robotFront == RobotFront.ARM) {
             robotFront = RobotFront.GRABBER;
