@@ -38,22 +38,22 @@ public interface DarkAutonomous {
     float REPOSITION_BRIDGE_DIST = 20;
     float REPOSITION_WALL_DIST = 33;
     double REPOSITION_POWER = 0.8;
-    float REPOSITION_TIME = 3;
+    float REPOSITION_TIME = 4;
 
     //drive armSide to clear the bridge before lifting the arm
-    float UNDER_BRIDGE_DIST = 110;
+    float UNDER_BRIDGE_DIST = 125;
     double UNDER_BRIDGE_POWER = 1;
-    float UNDER_BRIDGE_TIME = 3;
+    float UNDER_BRIDGE_TIME = 4;
 
     //drive grabberSide to drop the stone, driving just far enough to cross the bridge line
-    float DROP_STONE_DIST = 50;
+    float DROP_STONE_DIST = 55;
     double DROP_STONE_POWER = 1;
-    float DROP_STONE_TIME = 3;
+    float DROP_STONE_TIME = 4;
 
     //after dropping, drive back to park
     float TO_PARK_DIST = 55;
     double TO_PARK_POWER = 0.9;
-    float TO_PARK_TIME = 3;
+    float TO_PARK_TIME = 4;
 
     /** FOUNDATION SIDE BELOW **/
 

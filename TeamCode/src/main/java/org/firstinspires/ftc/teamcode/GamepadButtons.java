@@ -14,6 +14,8 @@ public class GamepadButtons {
     private boolean xWasPressed;
     private boolean yWasPressed;
 
+    private boolean aStatus, bStatus, xStatus, yStatus;
+
     public GamepadButtons(Gamepad gamepad) {
         this.gamepad = gamepad;
         aWasPressed = false;
@@ -53,8 +55,27 @@ public class GamepadButtons {
         }
     }
 
+    private void setStatus(Button button, boolean status) {
+        switch (button) {
+            case A: aStatus = status;
+            case B: bStatus = status;
+            case X: xStatus = status;
+            case Y: yStatus = status;
+        }
+    }
+
+    public boolean getStatus(Button button) {
+        switch (button) {
+            case A: return aStatus;
+            case B: return bStatus;
+            case X: return xStatus;
+            case Y: return yStatus;
+            default: return false; //should never trigger
+        }
+    }
+
     //tells you if a button has been pressed since the last time you checked, so should only trigger one time per button press
-    public boolean buttonPressed(Button button) {
+    private boolean buttonPressed(Button button) {
         //if the button is held down, and wasnt held down the last time we checked
         if(buttonHeld(button) && !buttonWasHeld(button)) {
             setWasHeld(button, true);
@@ -67,6 +88,7 @@ public class GamepadButtons {
     public void update() {
         for(Button button : Button.values()) {
             if (!buttonHeld(button)) setWasHeld(button, false);
+            setStatus(button, buttonPressed(button));
         }
     }
 }

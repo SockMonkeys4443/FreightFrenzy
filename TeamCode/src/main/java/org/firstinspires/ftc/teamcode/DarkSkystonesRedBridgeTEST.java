@@ -47,7 +47,7 @@ public class DarkSkystonesRedBridgeTEST extends SuperDark implements DarkAutonom
         if(telemetryEnabled) telemetry.speak("Strafing to the skystone");
         //strafe to face skystone
         //minus 5 to compensate for the depot placement on this side
-        drive.stableDriveDistance(DeadWheels.grabberSide, distanceSkystone - SKYSTONE_WIDTH + 5, STONE_STRAFE_POWER, STONE_STRAFE_TIME);
+        drive.stableDriveDistance(DeadWheels.grabberSide, distanceSkystone - SKYSTONE_WIDTH + 10, STONE_STRAFE_POWER, STONE_STRAFE_TIME);
 
         arm.setClaw(false); //opens claw
 
@@ -78,6 +78,11 @@ public class DarkSkystonesRedBridgeTEST extends SuperDark implements DarkAutonom
         if(telemetryEnabled) telemetry.speak("Driving under bridge");
         //goes under bridge
         drive.stableDriveDistance(DeadWheels.armSide, UNDER_BRIDGE_DIST, UNDER_BRIDGE_POWER, UNDER_BRIDGE_TIME);
+
+        //TODO:: Test sleep please remove
+        sleep(750);
+        arm.goToAngle(10, 0.5);
+        sleep(750);
 
         if(telemetryEnabled) telemetry.speak("Going to drop stone");
         //drives to park, taking into account where we went to grab the skystone

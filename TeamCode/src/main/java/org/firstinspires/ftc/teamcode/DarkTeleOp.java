@@ -61,11 +61,13 @@ public class DarkTeleOp extends SuperDark {
         //buttons
 
 
-        if (buttons1.buttonPressed(Y)) {
+        //BROKE
+        if (buttons1.getStatus(Y)) {
             toggleFront();
         }
 
-        if (buttons1.buttonPressed(B)) {
+        //BROKE
+        if (buttons1.getStatus(B)) {
             if (foundServo.getPosition() == 1) {
                 telemetry.speak("Whos Joe?");
                 foundServo.setPosition(0.17); //~30 degrees from the 0 point - that being the top
@@ -75,22 +77,27 @@ public class DarkTeleOp extends SuperDark {
             }
         }
 
-        if (buttons1.buttonPressed(A)) {
+        //GOOD
+        if (buttons1.getStatus(A)) {
             toggleSpeed();
         }
-        if (buttons1.buttonPressed(X)) {
+        //GOOD
+        if (buttons1.getStatus(X)) {
             telemetry.speak("Fifty Percent");
         }
 
-        if (buttons2.buttonPressed(Y)) {
+        //BROKE
+        if (buttons2.getStatus(Y)) {
             toggleArmSpeed();
         }
 
-        if (buttons2.buttonPressed(X)) {
+
+        if (buttons2.getStatus(X)) {
             arm.resetPitchEncoder();
         }
 
-        if (buttons2.buttonPressed(A)) {
+        //GOOD
+        if (buttons2.getStatus(A)) {
             toggleArmReseting();
         }
 
@@ -180,11 +187,12 @@ public class DarkTeleOp extends SuperDark {
             }
         }
 
+
         void toggleArmSpeed() {
-            if (armSpeed != 1f) {
-                armSpeed = 1f;
-            } else {
+            if (armSpeed == 1f) {
                 armSpeed = 0.4f;
+            } else {
+                armSpeed = 1f;
             }
         }
 

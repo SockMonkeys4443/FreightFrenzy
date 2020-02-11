@@ -409,17 +409,17 @@ public class Drive {
                 break;
             }
 
-            if(Math.abs(angleDiff(stableAngle, imuController.getAngle())) > 5 ) {
-                newTurnTo(stableAngle, 0.8, 0.5f);
+            if(Math.abs(angleDiff(stableAngle, imuController.getAngle())) > 7 ) {
+                newTurnTo(stableAngle, 0.8, 0.7f);
             }
 
-            if(Math.abs(deadWheels.getTicks(sideways) - stableSideTicks) > deadWheels.CMtoticks(3)) {
+            if(Math.abs(deadWheels.getTicks(sideways) - stableSideTicks) > deadWheels.CMtoticks(4)) {
                 int offset = stableSideTicks - deadWheels.getTicks(sideways);
-                if(offset > deadWheels.CMtoticks(3)) {
-                    strafeLeft(-0.5);
+                if(offset > deadWheels.CMtoticks(4)) {
+                    strafeLeft(-0.4);
                 }
-                else if(offset < deadWheels.CMtoticks(-3)) {
-                    strafeLeft(0.5);
+                else if(offset < deadWheels.CMtoticks(-4)) {
+                    strafeLeft(0.4);
                 }
                 else break;
             }

@@ -99,9 +99,9 @@ public class NewArm {
 
         pitchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        pitchMotor.setPower(power);
+        pitchPower((float)power);
         while(Math.abs(pitchMotor.getCurrentPosition()-pitchMotor.getTargetPosition()) < 20);
-        pitchMotor.setPower(0);
+        pitchPower((float)0);
     }
 
     void updateMode() {
@@ -151,12 +151,12 @@ public class NewArm {
         extendMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         while (pitchState() && opMode.opModeIsActive()) {
-            pitchMotor.setPower(power);
+            pitchPower((float)power);
 
         }
-        pitchMotor.setPower(-0.2);
+        pitchPower((float)0.2);
         opMode.sleep(200);
-        pitchMotor.setPower(0);
+        pitchPower(0);
 
         while (extendState() && opMode.opModeIsActive()) {
             extendMotor.setPower(1);
