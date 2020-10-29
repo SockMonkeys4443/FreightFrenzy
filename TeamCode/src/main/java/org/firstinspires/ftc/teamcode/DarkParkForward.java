@@ -13,7 +13,7 @@ public class DarkParkForward extends SuperDark {
         //THE CAMERA IS AT THE FRONT FOR THIS OPMODE
         timer.restart();
 
-        drive.driveDistance(DeadWheels.armSide, 60, 0.5, 1);
+        oldDrive.driveDistance(DeadWheels.armSide, 60, 0.5, 1);
 
         stop();
 

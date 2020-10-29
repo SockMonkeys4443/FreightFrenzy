@@ -1,13 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import static org.firstinspires.ftc.teamcode.GamepadButtons.Button.*;
 
@@ -49,7 +42,7 @@ public class DarkTeleOp extends SuperDark {
     @Override
     public void darkRunning() {
 
-        //drive
+        //oldDrive
         if (driveMode == DriveMode.NORMAL) {
             driveNormal(drivePower);
         } else if (driveMode == DriveMode.DIAGONAL) {
@@ -136,7 +129,7 @@ public class DarkTeleOp extends SuperDark {
         telemetry.addData("Heading", imuController.getAngle() + " " + imuController.getAngle360());
         telemetry.addData("HeadingA:", imuController.getAngle360());
         telemetry.addData("driveMode", driveMode);
-        telemetry.addData("Drive Power", drivePower);
+        telemetry.addData("OldDrive Power", drivePower);
 
         telemetry.update();
 
@@ -222,7 +215,7 @@ public class DarkTeleOp extends SuperDark {
         }
 
 
-        //Drive Methods
+        //OldDrive Methods
 
         void driveNormal(double power) {
             double frontPower = -gamepad1.left_stick_y * power;
@@ -236,15 +229,15 @@ public class DarkTeleOp extends SuperDark {
             frontPower = zeroDoubleValue(frontPower, sidePower, 0.3);
 
             if (robotFront == RobotFront.ARM) {
-                drive.frontLeft.setPower(frontPower - sidePower + turnPower);
-                drive.frontRight.setPower(-frontPower + sidePower + turnPower);
-                drive.backLeft.setPower(-frontPower - sidePower + turnPower);
-                drive.backRight.setPower(frontPower + sidePower + turnPower);
+                oldDrive.frontLeft.setPower(frontPower - sidePower + turnPower);
+                oldDrive.frontRight.setPower(-frontPower + sidePower + turnPower);
+                oldDrive.backLeft.setPower(-frontPower - sidePower + turnPower);
+                oldDrive.backRight.setPower(frontPower + sidePower + turnPower);
             } else if (robotFront == RobotFront.GRABBER) {
-                drive.frontLeft.setPower(-frontPower - sidePower + turnPower);
-                drive.frontRight.setPower(frontPower + sidePower + turnPower);
-                drive.backLeft.setPower(-frontPower + sidePower + turnPower);
-                drive.backRight.setPower(frontPower - sidePower + turnPower);
+                oldDrive.frontLeft.setPower(-frontPower - sidePower + turnPower);
+                oldDrive.frontRight.setPower(frontPower + sidePower + turnPower);
+                oldDrive.backLeft.setPower(-frontPower + sidePower + turnPower);
+                oldDrive.backRight.setPower(frontPower - sidePower + turnPower);
             }
         }
 
@@ -262,10 +255,10 @@ public class DarkTeleOp extends SuperDark {
             frontPower = zeroDoubleValue(frontPower, sidePower, 0.33);
 
 
-            drive.frontLeft.setPower((frontPower + sidePower) + turnPower);
-            drive.frontRight.setPower((frontPower - sidePower) - turnPower);
-            drive.backLeft.setPower((frontPower - sidePower) + turnPower);
-            drive.backRight.setPower((frontPower + sidePower) - turnPower);
+            oldDrive.frontLeft.setPower((frontPower + sidePower) + turnPower);
+            oldDrive.frontRight.setPower((frontPower - sidePower) - turnPower);
+            oldDrive.backLeft.setPower((frontPower - sidePower) + turnPower);
+            oldDrive.backRight.setPower((frontPower + sidePower) - turnPower);
 
 
             telemetry.addData("frontPower", frontPower);
@@ -280,18 +273,18 @@ public class DarkTeleOp extends SuperDark {
             double turnPower = gamepad1.right_stick_x * power * 0.8;
 
         /*
-        drive.frontLeft.setPower((frontPower +sidePower) +turnPower);
-        drive.frontRight.setPower((frontPower-sidePower) -turnPower);
-        drive.backLeft.setPower((frontPower-sidePower) +turnPower);
-        drive.backRight.setPower((frontPower+sidePower) -turnPower);
+        oldDrive.frontLeft.setPower((frontPower +sidePower) +turnPower);
+        oldDrive.frontRight.setPower((frontPower-sidePower) -turnPower);
+        oldDrive.backLeft.setPower((frontPower-sidePower) +turnPower);
+        oldDrive.backRight.setPower((frontPower+sidePower) -turnPower);
         */
             //frontLeft grabberSide
             //backRight grabberSide
 
-            drive.frontLeft.setPower(frontPower + turnPower);
-            drive.backRight.setPower(frontPower - turnPower);
-            drive.frontRight.setPower(-sidePower - turnPower);
-            drive.backLeft.setPower(-sidePower + turnPower);
+            oldDrive.frontLeft.setPower(frontPower + turnPower);
+            oldDrive.backRight.setPower(frontPower - turnPower);
+            oldDrive.frontRight.setPower(-sidePower - turnPower);
+            oldDrive.backLeft.setPower(-sidePower + turnPower);
 
 
         }
@@ -319,10 +312,10 @@ public class DarkTeleOp extends SuperDark {
             //if(turnPower>0.5) {turnPower=1;} else if (turnPower<-0.5) {turnPower=-1;} else {turnPower=0;}
 
 
-            drive.frontLeft.setPower((frontPower + sidePower) + turnPower);
-            drive.frontRight.setPower((frontPower - sidePower) - turnPower);
-            drive.backLeft.setPower((frontPower - sidePower) + turnPower);
-            drive.backRight.setPower((frontPower + sidePower) - turnPower);
+            oldDrive.frontLeft.setPower((frontPower + sidePower) + turnPower);
+            oldDrive.frontRight.setPower((frontPower - sidePower) - turnPower);
+            oldDrive.backLeft.setPower((frontPower - sidePower) + turnPower);
+            oldDrive.backRight.setPower((frontPower + sidePower) - turnPower);
 
         }
 
@@ -382,10 +375,10 @@ public class DarkTeleOp extends SuperDark {
 
             double turnPower = gamepad1.right_stick_x * power;
 
-            drive.frontLeft.setPower((frontPower1 + sidePower1) + turnPower);
-            drive.frontRight.setPower((frontPower2 - sidePower2) - turnPower);
-            drive.backRight.setPower((frontPower1 + sidePower1) - turnPower);
-            drive.backLeft.setPower((frontPower2 - sidePower2) + turnPower);
+            oldDrive.frontLeft.setPower((frontPower1 + sidePower1) + turnPower);
+            oldDrive.frontRight.setPower((frontPower2 - sidePower2) - turnPower);
+            oldDrive.backRight.setPower((frontPower1 + sidePower1) - turnPower);
+            oldDrive.backLeft.setPower((frontPower2 - sidePower2) + turnPower);
 
         }
 

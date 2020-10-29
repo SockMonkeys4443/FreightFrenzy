@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.ftccommon.SoundPlayer;
 
 @Autonomous(name="Double Skystones Red", group="test")
 public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
@@ -19,13 +18,13 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
 
         //there are 29 inches between where the closest edge of the robot starts to the stones
 
-        //drive to where all 3 stones fit into view
+        //oldDrive to where all 3 stones fit into view
         CircuitBreakersVuforia.skystonePos skystonePosition;
 
 
-        //drive to scan skystone
+        //oldDrive to scan skystone
 
-        drive.driveDistance(DeadWheels.armSide, TO_SCAN_DIST, TO_SCAN_POWER, TO_SCAN_TIME);
+        oldDrive.driveDistance(DeadWheels.armSide, TO_SCAN_DIST, TO_SCAN_POWER, TO_SCAN_TIME);
 
         telemetry.speak("Scanning");
 
@@ -47,14 +46,14 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
 
         //strafe to face skystone
         //minus 5 to compensate for the depot placement on this side
-        drive.driveDistance(DeadWheels.grabberSide, distanceSkystone-SKYSTONE_WIDTH - 20, STONE_STRAFE_POWER, STONE_STRAFE_TIME);
+        oldDrive.driveDistance(DeadWheels.grabberSide, distanceSkystone-SKYSTONE_WIDTH - 20, STONE_STRAFE_POWER, STONE_STRAFE_TIME);
 
         arm.setClaw(false); //opens claw
 
         telemetry.speak("Eating skystone");
 
-        //drive forwards to 'eat' skystone
-        drive.driveDistance(DeadWheels.armSide, TO_GRAB_DIST, TO_GRAB_POWER, TO_GRAB_TIME);
+        //oldDrive forwards to 'eat' skystone
+        oldDrive.driveDistance(DeadWheels.armSide, TO_GRAB_DIST, TO_GRAB_POWER, TO_GRAB_TIME);
 
         arm.setClaw(true);
         telemetry.speak("yum");
@@ -63,37 +62,37 @@ public class DarkDoubleSkystoneRed extends SuperDark implements DarkAutonomous {
         sleep(500);
 
         //drives backwards after picking up the skystone
-        drive.driveDistance(DeadWheels.armSide, -BACK_AFTERGRAB_DIST, BACK_AFTERGRAB_POWER, BACK_AFTERGRAB_TIME);
+        oldDrive.driveDistance(DeadWheels.armSide, -BACK_AFTERGRAB_DIST, BACK_AFTERGRAB_POWER, BACK_AFTERGRAB_TIME);
 
         telemetry.speak("turning");
 
-        drive.newTurnTo(-TURN_TARGET_ANGLE, TURN_POWER, TURN_TIME);
+        oldDrive.newTurnTo(-TURN_TARGET_ANGLE, TURN_POWER, TURN_TIME);
         sleep(250);
-        drive.newTurnTo(-TURN_TARGET_ANGLE, TURN_POWER, TURN_TIME);
+        oldDrive.newTurnTo(-TURN_TARGET_ANGLE, TURN_POWER, TURN_TIME);
 
         telemetry.speak("Driving under bridge");
-        drive.driveDistance(DeadWheels.armSide, UNDER_BRIDGE_DIST, UNDER_BRIDGE_POWER, UNDER_BRIDGE_TIME);
+        oldDrive.driveDistance(DeadWheels.armSide, UNDER_BRIDGE_DIST, UNDER_BRIDGE_POWER, UNDER_BRIDGE_TIME);
 
         telemetry.speak("Lifting arm");
         arm.goToAngle(-50f, 0.7);
 
 
         //drives to deliver the skystone under the bridge
-        drive.driveDistance(DeadWheels.armSide, DROP_STONE_DIST, DROP_STONE_POWER, DROP_STONE_TIME);
+        oldDrive.driveDistance(DeadWheels.armSide, DROP_STONE_DIST, DROP_STONE_POWER, DROP_STONE_TIME);
 
         telemetry.speak("dropping stone");
         //arm.goToAngle(20f,0.5);
         arm.setClaw(false); //opens claw
 
-        //drive.newTurnTo(-180f, 0.75, 3);
+        //oldDrive.newTurnTo(-180f, 0.75, 3);
 
         telemetry.speak("moving to center");
 
-        drive.driveDistance(DeadWheels.grabberSide, TILE_SIZE * 3.2f, 0.75, 3);
+        oldDrive.driveDistance(DeadWheels.grabberSide, TILE_SIZE * 3.2f, 0.75, 3);
 
         telemetry.speak("crossing neutral bridge");
 
-        drive.driveDistance(DeadWheels.armSide, -TILE_SIZE * 5f,0.75,5);
+        oldDrive.driveDistance(DeadWheels.armSide, -TILE_SIZE * 5f,0.75,5);
 
         telemetry.speak("joebama");
         stop();
