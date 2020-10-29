@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public abstract class Robot extends LinearOpMode {
 
 
-
+    Drive drive = new Drive();
 
 
     IMUController imuController = new IMUController();
@@ -19,6 +19,10 @@ public abstract class Robot extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         telemetry.addData("Status", "Initializing Robot...");
         telemetry.update();
+
+        drive.init(this);
+
+
 
         imuController.init(hardwareMap, telemetry);
         while(!imuController.imu.isGyroCalibrated() && !isStopRequested()) {
