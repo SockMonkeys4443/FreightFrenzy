@@ -26,4 +26,13 @@ public class Drive {
 
     }
 
+    public void driveForward(double power) {
+        frontLeft.setPower(power);
+        frontRight.setPower(power);
+        backLeft.setPower(power);
+        backRight.setPower(power);
+    }
+
+
+
 }
