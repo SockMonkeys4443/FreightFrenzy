@@ -60,9 +60,6 @@ public class DarkTeleOp extends SuperDark {
             driveNormal(drivePower);
         }
 
-        //buttons
-
-
         //BROKE
         if (buttons1.getStatus(Y)) {
             toggleFront();
