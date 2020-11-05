@@ -74,7 +74,7 @@ public class Drive {
 
 
 
-    private void setMotorPower(double frontLeft, double frontRight, double backLeft, double backRight) {
+    public void setMotorPower(double frontLeft, double frontRight, double backLeft, double backRight) {
         this.frontLeft.setPower(frontLeft);
         this.frontRight.setPower(frontRight);
         this.backLeft.setPower(backLeft);
