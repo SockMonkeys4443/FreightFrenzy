@@ -9,7 +9,9 @@ public class TeleOp extends Robot {
 
     @Override
     public void robotRunning() {
+        driveRobot();
 
+        idle();
     }
 
     private void driveRobot() {
