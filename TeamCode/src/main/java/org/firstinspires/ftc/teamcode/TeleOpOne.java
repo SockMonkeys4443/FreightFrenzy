@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
-public class TeleOp extends Robot {
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+@TeleOp(name = "TeleOp", group = "test")
+public class TeleOpOne extends Robot {
 
     @Override
     public void robotInit() {
@@ -15,8 +18,8 @@ public class TeleOp extends Robot {
     }
 
     private void driveRobot() {
-        double frontPower = gamepad1.left_stick_y;
-        double sidePower = gamepad1.left_stick_x;
+        double frontPower = gamepad1.left_stick_x;
+        double sidePower = -gamepad1.left_stick_y;
 
         double turnPower = gamepad1.right_stick_x;
 
