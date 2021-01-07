@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
+//import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class Drive {
 
-    DcMotor frontLeft;
-    DcMotor frontRight;
-    DcMotor backLeft;
-    DcMotor backRight;
+    private DcMotor frontLeft;
+    private DcMotor frontRight;
+    private DcMotor backLeft;
+    private DcMotor backRight;
 
     Robot opMode;
 
@@ -27,8 +27,13 @@ public class Drive {
 
         frontRight.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.REVERSE);
-
     }
+
+    //Stopping
+    public void stopDriving() {
+        setMotorPower(0, 0, 0, 0);
+    }
+
 
     //Directional Movement
     public void driveForward(double power) {
@@ -71,7 +76,7 @@ public class Drive {
         setMotorPower(-power, power, -power, power);
     }
 
-    public void turnReft(double power) {
+    public void turnRight(double power) {
         setMotorPower(power, -power, power, -power);
     }
 
