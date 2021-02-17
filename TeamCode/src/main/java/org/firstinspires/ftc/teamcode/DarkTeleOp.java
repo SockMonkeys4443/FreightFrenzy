@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import static org.firstinspires.ftc.teamcode.GamepadButtons.Button.*;
 
-
+@Disabled
 @TeleOp(name="★Dark TeleOp★", group="test")
 public class DarkTeleOp extends SuperDark {
 

@@ -1,13 +1,23 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import com.qualcomm.robotcore.hardware.Servo;
 
+//hi andres
+//shut up
 public abstract class Robot extends LinearOpMode {
 
 
     Drive drive = new Drive();
+    Intake intake = new Intake();
+    Camera camera = new Camera();
+    WobbleSheeley wobbleSheeley = new WobbleSheeley();
+
+    DcMotor conveyorMotor;
 
 
     IMUController imuController = new IMUController();
@@ -22,7 +32,13 @@ public abstract class Robot extends LinearOpMode {
         telemetry.update();
 
         drive.init(this);
+        intake.init(this);
+        camera.init(this);
+        wobbleSheeley.init(this);
 
+        conveyorMotor = hardwareMap.get(DcMotor.class, "conveyor");
+        conveyorMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        conveyorMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         imuController.init(hardwareMap, telemetry);

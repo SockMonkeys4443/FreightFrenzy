@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
+@Disabled
 @Autonomous(name="\uD83D\uDD34\uD83D\uDD35 \uD83D\uDC8E\uD83C\uDFE2 \uD83C\uDFF0\uD83C\uDF09 Dark Test", group="test")
 public class DarkTest extends SuperDark {
 

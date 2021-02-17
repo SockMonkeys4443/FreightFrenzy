@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
+@Disabled
 @Autonomous(name="\uD83D\uDC8E\uD83D\uDD35\uD83C\uDF09 Skystones Blue Bridge", group="workingSkystones")
 public class DarkSkystonesBlueBridge extends SuperDark implements DarkAutonomous  {
     @Override

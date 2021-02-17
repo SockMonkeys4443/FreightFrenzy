@@ -37,11 +37,11 @@ public class Drive {
 
     //Directional Movement
     public void driveForward(double power) {
-        setMotorPower(power, power, power, power);
+        setMotorPower(-power, -power, -power, -power);
     }
 
     public void driveBackward(double power) {
-        setMotorPower(-power, -power, -power, -power);
+        setMotorPower(power, power, power, power);
     }
 
     public void strafeLeft(double power) {
