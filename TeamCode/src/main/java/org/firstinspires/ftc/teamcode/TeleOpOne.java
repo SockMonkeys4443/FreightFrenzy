@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import static org.firstinspires.ftc.teamcode.GamepadButtons.Button.*;
 
 @TeleOp(name = "TeleOp", group = "working")
 public class TeleOpOne extends Robot {
@@ -10,6 +9,9 @@ public class TeleOpOne extends Robot {
     double drivePower = 1;
     boolean intakeOn = false;
     boolean conveyorOn = false;
+    boolean shooting = false;
+
+    double sheeleyLocation;
 
     NewGamepadButtons buttons1;
     NewGamepadButtons buttons2;
@@ -21,6 +23,7 @@ public class TeleOpOne extends Robot {
     public void robotInit() {
         buttons1 = new NewGamepadButtons(gamepad1);
         buttons2 = new NewGamepadButtons(gamepad2);
+        sheeleyLocation = wobbleSheeley.findSheeley();
     }
 
     @Override
@@ -32,6 +35,10 @@ public class TeleOpOne extends Robot {
         //A1 pressed
         if (button1Values[0]) {
             toggleSpeed();
+        }
+        //B1 pressed
+        if (button1Values[1]) {
+            toggleShooter();
         }
 
         //A2 pressed
@@ -61,7 +68,23 @@ public class TeleOpOne extends Robot {
             wobbleSheeley.touchKids();
         }
 
-        wobbleSheeley.runBase(-gamepad2.right_stick_y * 0.15);
+        if (gamepad2.right_trigger > 0.5f) {
+            wobbleSheeley.prepareToTouch();
+        }
+        if (gamepad2.left_trigger > 0.5f) {
+            wobbleSheeley.disengage();
+        }
+
+        if (gamepad2.left_stick_y > 0.5) {
+            sheeleyLocation += 0.01;
+        }
+        if (gamepad2.left_stick_y < -0.5) {
+            sheeleyLocation -= 0.01;
+        }
+        sheeleyLocation = Math.max(sheeleyLocation, 0.36);
+        sheeleyLocation = Math.min(sheeleyLocation, 1.00);
+
+        wobbleSheeley.setTouchPosition(sheeleyLocation);
 
         driveRobot();
 
@@ -93,6 +116,15 @@ public class TeleOpOne extends Robot {
             drivePower = 0.3;
         } else {
             drivePower = 1;
+        }
+    }
+
+    void toggleShooter() {
+        shooting = !shooting;
+        if (shooting) {
+            shooter.shoot();
+        } else {
+            shooter.stopShooting();
         }
     }
 

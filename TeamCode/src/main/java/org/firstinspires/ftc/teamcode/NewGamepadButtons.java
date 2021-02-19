@@ -25,28 +25,28 @@ public class NewGamepadButtons {
         if (gamepad.a && aReleased) {
             aReleased = false;
             values[0] = true;
-        } else {
+        } else if (!gamepad.a){
             aReleased = true;
         }
 
         if (gamepad.b && bReleased) {
             bReleased = false;
             values[1] = true;
-        } else {
+        } else if (!gamepad.b) {
             bReleased = true;
         }
 
         if (gamepad.x && xReleased) {
             xReleased = false;
             values[2] = true;
-        } else {
+        } else if (!gamepad.x){
             xReleased = true;
         }
 
         if (gamepad.y && yReleased) {
             yReleased = false;
             values[3] = true;
-        } else {
+        } else if (!gamepad.y) {
             yReleased = true;
         }
 
