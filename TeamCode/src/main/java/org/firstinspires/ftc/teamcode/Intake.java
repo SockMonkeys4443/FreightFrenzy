@@ -16,10 +16,18 @@ public class Intake {
     }
 
     public void runIntake() {
-        intakeMotor.setPower(0.5);
+        intakeMotor.setPower(1);
     }
 
     public void stopIntake() {
         intakeMotor.setPower(0);
+    }
+
+    public void reverseIntake() {
+        intakeMotor.setPower(-1);
+    }
+
+    public void setPower(double power) {
+        intakeMotor.setPower(power);
     }
 }

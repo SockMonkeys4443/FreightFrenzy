@@ -75,7 +75,7 @@ public class Camera {
         static final int REGION_WIDTH = 29;
         static final int REGION_HEIGHT = 19;
 
-        final int FOUR_RING_THRESHOLD = 150;
+        final int FOUR_RING_THRESHOLD = 153;
         final int ONE_RING_THRESHOLD = 138;
 
         Point region1_pointA = new Point(

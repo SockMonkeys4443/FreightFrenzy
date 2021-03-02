@@ -8,8 +8,8 @@ public class WobbleSheeley  {
     Servo base;
     Servo toucher;
 
-    double legalPosition = 0.68;
-    double touchedPosition = 0.82;
+    double legalPosition = 0.54;
+    double touchedPosition = 0.84;
 
     boolean kidsTouched = false;
 
@@ -32,7 +32,6 @@ public class WobbleSheeley  {
     }
 
     public void setTouchPosition(double position) {
-        position = Math.max(0.36, position);
         base.setPosition(position);
     }
 

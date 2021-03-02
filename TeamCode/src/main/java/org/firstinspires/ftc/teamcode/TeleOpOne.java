@@ -7,11 +7,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class TeleOpOne extends Robot {
 
     double drivePower = 1;
-    boolean intakeOn = false;
     boolean conveyorOn = false;
     boolean shooting = false;
+    int intakeMode = 0;
 
-    double sheeleyLocation;
+    double sheeleyLocation = 1;
 
     NewGamepadButtons buttons1;
     NewGamepadButtons buttons2;
@@ -23,7 +23,7 @@ public class TeleOpOne extends Robot {
     public void robotInit() {
         buttons1 = new NewGamepadButtons(gamepad1);
         buttons2 = new NewGamepadButtons(gamepad2);
-        sheeleyLocation = wobbleSheeley.findSheeley();
+        wobbleSheeley.setTouchPosition(1.00);
     }
 
     @Override
@@ -41,32 +41,25 @@ public class TeleOpOne extends Robot {
             toggleShooter();
         }
 
+        if (button2Values[2]) {
+            toggleIntakeNegative();
+        }
+
         //A2 pressed
         if (button2Values[0]) {
             toggleIntake();
         }
-        //B2 pressed
-        if (button2Values[1]) {
-            toggleConveyor();
-        }
-        //X2 pressed
-        if (button2Values[2]) {
-            if (intakeOn || conveyorOn) {
-                conveyorMotor.setPower(0);
-                intake.stopIntake();
-                conveyorOn = false;
-                intakeOn = false;
-            } else {
-                conveyorMotor.setPower(1);
-                intake.runIntake();
-                conveyorOn = true;
-                intakeOn = false;
-            }
-        }
-        //Y2 pressed
-        if (button2Values[3]) {
-            wobbleSheeley.touchKids();
-        }
+
+
+         if (gamepad2.b) {
+             conveyorMotor.setPower(1);
+         } else if (gamepad2.y) {
+             conveyorMotor.setPower(-1);
+         } else {
+             conveyorMotor.setPower(0);
+         }
+
+
 
         if (gamepad2.right_trigger > 0.5f) {
             wobbleSheeley.prepareToTouch();
@@ -75,18 +68,24 @@ public class TeleOpOne extends Robot {
             wobbleSheeley.disengage();
         }
 
-        if (gamepad2.left_stick_y > 0.5) {
+        if (gamepad2.left_stick_y > 0.6) {
             sheeleyLocation += 0.01;
+        } else if (gamepad2.left_stick_y > 0.2) {
+            sheeleyLocation += 0.005;
         }
-        if (gamepad2.left_stick_y < -0.5) {
+        if (gamepad2.left_stick_y < -0.6) {
             sheeleyLocation -= 0.01;
+        } else if (gamepad2.left_stick_y < -0.2) {
+            sheeleyLocation -= 0.005;
         }
-        sheeleyLocation = Math.max(sheeleyLocation, 0.36);
+        sheeleyLocation = Math.max(sheeleyLocation, 0);
         sheeleyLocation = Math.min(sheeleyLocation, 1.00);
 
         wobbleSheeley.setTouchPosition(sheeleyLocation);
 
         driveRobot();
+        telemetry.addData("servoPos", wobbleSheeley.base.getPosition());
+        telemetry.update();
 
 
         idle();
@@ -94,19 +93,22 @@ public class TeleOpOne extends Robot {
 
 
     private void driveRobot() {
+        //sets the powers based on stick positions
         double sidePower = gamepad1.left_stick_x * drivePower;
         double frontPower = gamepad1.left_stick_y * drivePower;
-
         double turnPower = gamepad1.right_stick_x * drivePower;
 
+        //sets sidePower or frontPower to zero if it is less than a third of the other's value
         zeroDoubleValue(frontPower, sidePower, 0.33);
         zeroDoubleValue(sidePower, frontPower, 0.33);
 
+        //calculates the power needed for each motor
         double flPower = (frontPower + sidePower) + turnPower;
         double frPower = (frontPower - sidePower) - turnPower;
         double blPower = (frontPower - sidePower) + turnPower;
         double brPower = (frontPower + sidePower) - turnPower;
 
+        //sets each motor to the desired power
         drive.setMotorPower(flPower, frPower, blPower, brPower);
     }
 
@@ -129,12 +131,23 @@ public class TeleOpOne extends Robot {
     }
 
     void toggleIntake() {
-        if (intakeOn) {
+        if (intakeMode == 1) {
             intake.stopIntake();
+            intakeMode = 0;
         } else {
             intake.runIntake();
+            intakeMode = 1;
         }
-        intakeOn = !intakeOn;
+    }
+
+    void toggleIntakeNegative() {
+        if (intakeMode == -1) {
+            intake.stopIntake();
+            intakeMode = 0;
+        } else {
+            intake.reverseIntake();
+            intakeMode = -1;
+        }
     }
 
     void toggleConveyor() {

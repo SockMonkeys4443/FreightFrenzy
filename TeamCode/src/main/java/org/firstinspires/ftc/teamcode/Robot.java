@@ -7,20 +7,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import com.qualcomm.robotcore.hardware.Servo;
 
-//hi andres
-//shut up
-public abstract class Robot extends LinearOpMode {
 
+public abstract class Robot extends LinearOpMode {
 
     Drive drive = new Drive();
     Intake intake = new Intake();
     Camera camera = new Camera();
     WobbleSheeley wobbleSheeley = new WobbleSheeley();
     Shooter shooter = new Shooter();
-
     DcMotor conveyorMotor;
-
-
     IMUController imuController = new IMUController();
 
     //Timer

@@ -32,23 +32,28 @@ public class BlueAuto extends Robot {
 
             drive.strafeLeft(0.6);
 
-            sleep(2000);
+            sleep(1950);
 
             drive.driveForward(0.6);
 
-            sleep(1300);
+            sleep(850);
 
             drive.driveForward(0.9);
 
-            sleep(800);
+            sleep(700);
 
             drive.driveBackward(0.9);
 
-            sleep(300);
+            sleep(600);
 
-            drive.stopDriving();
+            drive.strafeRight(0.7);
+
+            sleep(1800);
+
+            drive.driveForward(0.7);
 
             sleep(1000);
+
 
             drive.stopDriving();
 
@@ -86,7 +91,11 @@ public class BlueAuto extends Robot {
 
             drive.strafeLeft(0.6);
 
-            sleep(1900);
+            sleep(1850);
+
+            drive.turnRight(0.5);
+
+            sleep(100);
 
             drive.driveForward(0.6);
 
