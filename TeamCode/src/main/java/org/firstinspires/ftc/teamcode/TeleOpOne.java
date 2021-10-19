@@ -38,7 +38,7 @@ public class TeleOpOne extends Robot {
         }
         //B1 pressed
         if (button1Values[1]) {
-            toggleShooter();
+            //toggleShooter();
         }
 
         if (button2Values[2]) {
@@ -120,7 +120,7 @@ public class TeleOpOne extends Robot {
             drivePower = 1;
         }
     }
-
+/*
     void toggleShooter() {
         shooting = !shooting;
         if (shooting) {
@@ -128,7 +128,7 @@ public class TeleOpOne extends Robot {
         } else {
             shooter.stopShooting();
         }
-    }
+    } */
 
     void toggleIntake() {
         if (intakeMode == 1) {

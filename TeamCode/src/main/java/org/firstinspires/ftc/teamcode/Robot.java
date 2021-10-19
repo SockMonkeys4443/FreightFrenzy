@@ -14,7 +14,7 @@ public abstract class Robot extends LinearOpMode {
     Intake intake = new Intake();
     Camera camera = new Camera();
     WobbleSheeley wobbleSheeley = new WobbleSheeley();
-    Shooter shooter = new Shooter();
+    //Shooter shooter = new Shooter();
     DcMotor conveyorMotor;
     IMUController imuController = new IMUController();
 
@@ -31,7 +31,7 @@ public abstract class Robot extends LinearOpMode {
         intake.init(this);
         camera.init(this);
         wobbleSheeley.init(this);
-        shooter.init(this);
+        //shooter.init(this);
 
         conveyorMotor = hardwareMap.get(DcMotor.class, "conveyor");
         conveyorMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
