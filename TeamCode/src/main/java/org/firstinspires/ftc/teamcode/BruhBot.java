@@ -18,7 +18,14 @@ public class BruhBot extends LinearOpMode {
     private DcMotor backLeftDrive;
     private DcMotor backRightDrive;
 
+    private DcMotor brazo;
+
+    private DcMotor leftIntake;
+    private DcMotor rightIntake;
+
     private DcMotor duckyWheel;
+
+    double brazoSpeed = 0.2;
 
     @Override
     public void runOpMode() {
@@ -31,12 +38,15 @@ public class BruhBot extends LinearOpMode {
         backLeftDrive = hardwareMap.get(DcMotor.class, "back_left");
         backRightDrive = hardwareMap.get(DcMotor.class, "back_right");
 
-        duckyWheel = hardwareMap.get(DcMotor.class, "duck_wheel");
+        brazo = hardwareMap.get(DcMotor.class, "brazo");
 
+        leftIntake = hardwareMap.get(DcMotor.class, "left_intake");
+        rightIntake = hardwareMap.get(DcMotor.class, "right_intake");
+
+        duckyWheel = hardwareMap.get(DcMotor.class, "ducky_wheel");
 
         frontRightDrive.setDirection(DcMotor.Direction.REVERSE);
         backRightDrive.setDirection(DcMotor.Direction.REVERSE);
-
 
         waitForStart();
         runtime.reset();
@@ -44,6 +54,9 @@ public class BruhBot extends LinearOpMode {
 
         while (opModeIsActive()) {
             driveRobot();
+            runBrazo();
+
+            setIntakePower(gamepad2.right_trigger - gamepad2.left_trigger);
 
             idle();
         }
@@ -58,5 +71,17 @@ public class BruhBot extends LinearOpMode {
         backLeftDrive.setPower(forwardPower + turnPower);
         backRightDrive.setPower(forwardPower - turnPower);
     }
+
+    private void runBrazo() {
+        double brazoPower = gamepad2.right_stick_y * brazoSpeed;
+
+        brazo.setPower(brazoPower);
+    }
+
+    private void setIntakePower(double power) {
+        leftIntake.setPower(power);
+        rightIntake.setPower(power);
+    }
+
 
 }
