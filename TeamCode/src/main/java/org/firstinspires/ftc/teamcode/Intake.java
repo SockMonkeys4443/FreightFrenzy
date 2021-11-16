@@ -3,31 +3,22 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Intake {
-    private DcMotor intakeMotor;
+
+    DcMotor leftIntake;
+    DcMotor rightIntake;
 
     Robot opMode;
 
     void init(Robot opMode) {
         this.opMode = opMode;
 
-        intakeMotor = opMode.hardwareMap.get(DcMotor.class,"intake");
-
-        intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    }
-
-    public void runIntake() {
-        intakeMotor.setPower(1);
-    }
-
-    public void stopIntake() {
-        intakeMotor.setPower(0);
-    }
-
-    public void reverseIntake() {
-        intakeMotor.setPower(-1);
+        leftIntake = opMode.hardwareMap.get(DcMotor.class, "left_intake");
+        rightIntake = opMode.hardwareMap.get(DcMotor.class, "right_intake");
     }
 
     public void setPower(double power) {
-        intakeMotor.setPower(power);
+        leftIntake.setPower(power);
+        rightIntake.setPower(power);
     }
+
 }

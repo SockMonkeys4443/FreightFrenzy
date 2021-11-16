@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class WobbleSheeley  {
@@ -13,9 +12,9 @@ public class WobbleSheeley  {
 
     boolean kidsTouched = false;
 
-    Robot opMode;
+    OldRobot opMode;
 
-    public void init(Robot opMode) {
+    public void init(OldRobot opMode) {
         this.opMode = opMode;
 
         base = opMode.hardwareMap.get(Servo.class, "WobbleBase");

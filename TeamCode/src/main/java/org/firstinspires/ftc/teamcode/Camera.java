@@ -25,9 +25,9 @@ public class Camera {
     OpenCvInternalCamera phoneCam;
     RingDeterminationPipeline pipeline;
 
-    Robot opMode;
+    OldRobot opMode;
 
-    void init(Robot opMode) {
+    void init(OldRobot opMode) {
         this.opMode = opMode;
 
         int cameraMonitorViewId = opMode.hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", opMode.hardwareMap.appContext.getPackageName());

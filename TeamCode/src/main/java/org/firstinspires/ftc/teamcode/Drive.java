@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-//import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class Drive {
 
@@ -12,13 +11,13 @@ public class Drive {
 
     Robot opMode;
 
-    void init (Robot opMode) {
+    void init(Robot opMode) {
         this.opMode = opMode;
 
-        frontLeft = opMode.hardwareMap.get(DcMotor.class,"frontLeft");
-        frontRight = opMode.hardwareMap.get(DcMotor.class,"frontRight");
-        backLeft = opMode.hardwareMap.get(DcMotor.class,"backLeft");
-        backRight = opMode.hardwareMap.get(DcMotor.class,"backRight");
+        frontLeft = opMode.hardwareMap.get(DcMotor.class, "front_left");
+        frontRight = opMode.hardwareMap.get(DcMotor.class, "front_right");
+        backLeft = opMode.hardwareMap.get(DcMotor.class, "back_left");
+        backRight = opMode.hardwareMap.get(DcMotor.class, "back_right");
 
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -29,59 +28,13 @@ public class Drive {
         backRight.setDirection(DcMotor.Direction.REVERSE);
     }
 
-    //Stopping
-    public void stopDriving() {
+    void stop() {
         setMotorPower(0, 0, 0, 0);
     }
 
+    void driveForward(double power, double distance) {
 
-    //Directional Movement
-    public void driveForward(double power) {
-        setMotorPower(-power, -power, -power, -power);
     }
-
-    public void driveBackward(double power) {
-        setMotorPower(power, power, power, power);
-    }
-
-    public void strafeLeft(double power) {
-        setMotorPower(-power, power, power, -power);
-    }
-
-    public void strafeRight(double power) {
-        setMotorPower(power, -power, -power, power);
-    }
-
-
-    //Angular Movement
-    public void strafeForwardLeft(double power) {
-        setMotorPower(0, power, power, 0);
-    }
-
-    public void strafeForwardRight(double power) {
-        setMotorPower(power, 0, 0, power);
-    }
-
-    public void strafeBackwardLeft(double power) {
-        setMotorPower(-power, 0, 0, -power);
-    }
-
-    public void strafeBackwardRight(double power) {
-        setMotorPower(0, -power, -power, 0);
-    }
-
-
-    //turning
-    public void turnLeft(double power) {
-        setMotorPower(-power, power, -power, power);
-    }
-
-    public void turnRight(double power) {
-        setMotorPower(power, -power, power, -power);
-    }
-
-
-
 
     public void setMotorPower(double frontLeft, double frontRight, double backLeft, double backRight) {
         this.frontLeft.setPower(frontLeft);
@@ -89,5 +42,4 @@ public class Drive {
         this.backLeft.setPower(backLeft);
         this.backRight.setPower(backRight);
     }
-
 }

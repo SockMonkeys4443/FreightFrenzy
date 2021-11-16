@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous(name = "Auto", group = "working")
-public class BasicAuto extends Robot {
+public class BasicAuto extends OldRobot {
     @Override
     public void robotInit() {
 
@@ -17,27 +17,27 @@ public class BasicAuto extends Robot {
 
         sleep(1000);
 
-        drive.driveForward(0.6);
+        oldMechDrive.driveForward(0.6);
 
         sleep(3800);
 
-        drive.driveForward(0.9);
+        oldMechDrive.driveForward(0.9);
 
         sleep(800);
 
-        drive.driveBackward(0.9);
+        oldMechDrive.driveBackward(0.9);
 
         sleep(300);
 
-        drive.stopDriving();
+        oldMechDrive.stopDriving();
 
         sleep(1000);
 
-        drive.driveBackward(0.6);
+        oldMechDrive.driveBackward(0.6);
 
         sleep(900);
 
-        drive.stopDriving();
+        oldMechDrive.stopDriving();
 
         stop();
     }

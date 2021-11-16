@@ -5,21 +5,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public abstract class Robot extends LinearOpMode {
 
-    //Drive
-    Drive drive = new Drive();
+public abstract class OldRobot extends LinearOpMode {
 
-    //Brazo
-    Brazo brazo = new Brazo();
-
-    //Intake
-    Intake intake = new Intake();
-
-    //Ducky Wheel
-    DuckyWheel duckyWheel = new DuckyWheel();
-
-    //IMU
+    OldMechDrive oldMechDrive = new OldMechDrive();
+    OldIntake oldIntake = new OldIntake();
+    Camera camera = new Camera();
+    WobbleSheeley wobbleSheeley = new WobbleSheeley();
+    //Shooter shooter = new Shooter();
+    DcMotor conveyorMotor;
     IMUController imuController = new IMUController();
 
     //Timer
@@ -31,10 +25,16 @@ public abstract class Robot extends LinearOpMode {
         telemetry.addData("Status", "Initializing Robot...");
         telemetry.update();
 
-        drive.init(this);
-        brazo.init(this);
-        intake.init(this);
-        duckyWheel.init(this);
+        oldMechDrive.init(this);
+        oldIntake.init(this);
+        camera.init(this);
+        wobbleSheeley.init(this);
+        //shooter.init(this);
+
+        conveyorMotor = hardwareMap.get(DcMotor.class, "conveyor");
+        conveyorMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        conveyorMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         imuController.init(hardwareMap, telemetry);
         while(!imuController.imu.isGyroCalibrated() && !isStopRequested()) {
@@ -62,4 +62,5 @@ public abstract class Robot extends LinearOpMode {
 
     public abstract void robotInit();
     public abstract void robotRunning();
+
 }

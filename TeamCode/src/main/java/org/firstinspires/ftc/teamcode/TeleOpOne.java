@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
 @TeleOp(name = "TeleOp", group = "working")
-public class TeleOpOne extends Robot {
+public class TeleOpOne extends OldRobot {
 
     double drivePower = 1;
     boolean conveyorOn = false;
@@ -109,7 +109,7 @@ public class TeleOpOne extends Robot {
         double brPower = (frontPower + sidePower) - turnPower;
 
         //sets each motor to the desired power
-        drive.setMotorPower(flPower, frPower, blPower, brPower);
+        oldMechDrive.setMotorPower(flPower, frPower, blPower, brPower);
     }
 
 
@@ -132,20 +132,20 @@ public class TeleOpOne extends Robot {
 
     void toggleIntake() {
         if (intakeMode == 1) {
-            intake.stopIntake();
+            oldIntake.stopIntake();
             intakeMode = 0;
         } else {
-            intake.runIntake();
+            oldIntake.runIntake();
             intakeMode = 1;
         }
     }
 
     void toggleIntakeNegative() {
         if (intakeMode == -1) {
-            intake.stopIntake();
+            oldIntake.stopIntake();
             intakeMode = 0;
         } else {
-            intake.reverseIntake();
+            oldIntake.reverseIntake();
             intakeMode = -1;
         }
     }

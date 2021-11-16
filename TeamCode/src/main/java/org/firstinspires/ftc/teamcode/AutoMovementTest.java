@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 @Disabled
 @Autonomous(name = "Auto Movement Test", group = "test")
-public class AutoMovementTest extends Robot {
+public class AutoMovementTest extends OldRobot {
 
     @Override
     public void robotInit() {
@@ -18,30 +18,30 @@ public class AutoMovementTest extends Robot {
 
         sleep(1000);
 
-        drive.driveForward(0.5);
+        oldMechDrive.driveForward(0.5);
 
         sleep(1000);
 
-        drive.driveBackward(0.5);
+        oldMechDrive.driveBackward(0.5);
 
         sleep(1000);
 
-        drive.strafeLeft(0.5);
+        oldMechDrive.strafeLeft(0.5);
 
         sleep(1000);
 
-        drive.strafeRight(0.5);
+        oldMechDrive.strafeRight(0.5);
 
         sleep(1000);
 
-        drive.turnLeft(0.5);
+        oldMechDrive.turnLeft(0.5);
 
         sleep(1000);
 
-        drive.turnRight(0.5);
+        oldMechDrive.turnRight(0.5);
 
         sleep(1000);
 
-        drive.stopDriving();
+        oldMechDrive.stopDriving();
     }
 }
