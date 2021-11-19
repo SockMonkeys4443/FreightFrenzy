@@ -48,6 +48,8 @@ public abstract class Robot extends LinearOpMode {
 
         robotInit();
 
+        drive.resetEncoder();
+
         telemetry.addData("Status", "Initialization Complete!");
         telemetry.update();
 

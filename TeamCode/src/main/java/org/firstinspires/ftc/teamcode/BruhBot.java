@@ -17,13 +17,17 @@ public class BruhBot extends Robot {
 
     double wheelSpeed = 1;
 
+    double duckyPower = 0;
 
     double brazoSpeed = 0.4;
 
     double scoopPosition = 0;
     double scoopRotationModifier = 0.035;
 
+    boolean tankDriveActive = false;
+
     boolean a1Released = true;
+    boolean x1Released = true;
 
 
     @Override
@@ -33,12 +37,23 @@ public class BruhBot extends Robot {
 
     @Override
     public void robotRunning() {
-        driveRobot();
+
+        if (gamepad1.x && x1Released) {
+            tankDriveActive = !tankDriveActive;
+            x1Released = false;
+        } else if (!gamepad1.x && !x1Released) {
+            x1Released = true;
+        }
+
+        if (tankDriveActive) {
+            driveTank();
+        } else {
+            driveRobot();
+        }
+
         runBrazo();
 
-        rotateScoop();
-
-        intake.setPower(gamepad2.right_trigger - (gamepad2.left_trigger * 0.7));
+        intake.setPower(gamepad1.right_trigger - (gamepad1.left_trigger * 0.8));
 
         if (gamepad2.b) {
             scoopPosition = 1;
@@ -49,6 +64,8 @@ public class BruhBot extends Robot {
         }
 
         runDuckyWheel();
+
+        duckyWheel.setPower(duckyPower);
 
         if (gamepad1.a && a1Released) {
             wheelSpeed = wheelSpeed == 1 ? 0.4 : 1;
@@ -70,21 +87,29 @@ public class BruhBot extends Robot {
         drive.setMotorPower(forwardPower + turnPower, forwardPower - turnPower, forwardPower + turnPower, forwardPower - turnPower);
     }
 
+    private void driveTank() {
+        double leftPower = gamepad1.left_stick_y * wheelSpeed;
+        double rightPower = gamepad1.right_stick_y * wheelSpeed;
+
+        drive.setMotorPower(leftPower, rightPower, leftPower, rightPower);
+    }
+
     private void runBrazo() {
-        double brazoPower = gamepad2.left_stick_y * brazoSpeed + gamepad2.right_stick_y * brazoSpeed * 0.35;
+        double brazoPower = gamepad2.left_stick_y * brazoSpeed + gamepad2.right_stick_y * brazoSpeed * 0.5;
 
         brazo.setPower(brazoPower);
     }
 
 
-    private void rotateScoop() {
-        scoopPosition += gamepad2.right_stick_y * scoopRotationModifier;
-
-        //scoop.setPosition(scoopPosition);
-    }
 
     private void runDuckyWheel() {
-        duckyWheel.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
+        if (gamepad1.left_bumper) {
+            duckyPower = -1;
+        } else if (gamepad1.right_bumper) {
+            duckyPower = 1;
+        } else {
+            duckyPower = 0;
+        }
     }
 
 
